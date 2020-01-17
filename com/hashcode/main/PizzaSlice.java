@@ -1,9 +1,7 @@
 package com.hashcode.main;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,7 +10,8 @@ import java.util.Scanner;
 public class PizzaSlice {
 
 	public static void main(String[] args) {
-		try {Scanner scanner = new Scanner(new File("E:\\e_also_big.in"));
+		Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(System.in)));
+
 		List<Integer> tall = new ArrayList<Integer>();
 
 		while(scanner.hasNextInt()){
@@ -20,7 +19,7 @@ public class PizzaSlice {
 
 		}
 		scanner.close();
-		
+
 		int maximumSlices = tall.get(0);
 		tall.remove(0);
 		int pizzaVarieties = tall.get(0);	
@@ -49,7 +48,7 @@ public class PizzaSlice {
 
 		}
 
-		ArrayList<Integer> g = new ArrayList<Integer>();
+		List<Integer> g = new ArrayList<Integer>();
 		for(int k=0; k<m.size();k++) {
 
 			if(orignal.contains(m.get(k)))
@@ -59,18 +58,20 @@ public class PizzaSlice {
 
 		}
 		Collections.sort(g);
-
-		FileWriter fileWriter = new FileWriter("E:/pizzaOutput.txt");
-		PrintWriter printWriter = new PrintWriter(fileWriter);
-		printWriter.print(m.size());
-		printWriter.println();
+		
+		for(int i = 0; i < g.size(); i++) {  
+	        for(int j = i + 1; j < g.size(); j++) {  
+	            if(g.get(i) == g.get(j)) {       
+	            System.out.print(g.get(j)+" ");
+	            g.set(j, g.get(j)+1);
+	         
+	            }
+	        }  
+	    }  
+		
+		System.out.println(m.size());
 		for (Integer integer : g) {
-			printWriter.print(integer+" ");
-		}
-
-		printWriter.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.print(integer+" ");
 		}
 	}
 
